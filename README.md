@@ -73,6 +73,15 @@ Python 3.10, PyTorch 2.x. Seed 42 everywhere.
 
 Each backbone was fine-tuned once, so re-training can shift results by a few tenths of a point.
 
+## Inference on one image
+
+The ONNX backbone and head for EfficientNet-B0 + MLP + Softmax are in `deploy/` inside `deepfake_comparison.zip` (Notebook 5, Cell 17 exports them). Preprocessing must match training:
+
+- **RGB:** BGR→RGB, resize to 224×224, scale to [0, 1], ImageNet normalization.
+- **DFT channel:** grayscale of the 224×224 image, `log1p(|fftshift(fft2)|²)`, min-max scaled to [0, 1], stacked as the 4th channel.
+- **Handcrafted spectra:** grayscale resized to 256×256; azimuthal average of the log-power spectrum (128 values) and of the noise residual `gray − GaussianBlur(gray, 5×5, σ=1)` (128 values).
+- **Head input:** `[cnn_features (1280) | AZ (128) | NR (128)]` → fake probability, threshold 0.5.
+
 ## Measuring latency
 
 Notebook 5, Cell 14 times each backbone with batch 1 on CPU (fp32, median of 30 runs) and on GPU (fp16, median of 100 runs), plus batch-64 throughput. Cell 15 times preprocessing on 200 test images and adds the head time. On the T4 instance this gives about 9.6 ms preprocessing + 32.8 ms B0 backbone + 0.6 ms MLP head ≈ **43 ms per image**. Latency depends on hardware.
