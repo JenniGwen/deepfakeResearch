@@ -22,7 +22,7 @@ All notebooks, trained checkpoints, extracted features and result tables are in 
 | 1 | [`ML_deepfake_detector_v6_efficientnetb0.ipynb`](https://colab.research.google.com/drive/1fIK1n7RumXMaXNwxzT7r4loelZKQhu0f) | Builds the leakage-free split, augmentation, 4-channel EfficientNet-B0 fine-tuning, and extracts the frozen features (CNN + AZ + NR). Writes `split_manifest_v6.json`, which every other notebook reuses. |
 | 2 | [`01_backbone_resnet50_fixed.ipynb`](https://colab.research.google.com/drive/1pFmc04Fg4wR7JV8_GsvfiVg27UEXvsXt) | Same recipe and split with a ResNet-50 backbone. |
 | 3 | [`02_backbone_mobilenetv3_fixed.ipynb`](https://colab.research.google.com/drive/1C1b6PmEytyScQBkXb77nJSJKP4X98MMS) | Same recipe and split with a MobileNetV3-Large backbone. |
-| 4 | `ablation_efnetb0.ipynb` | RGB-only EfficientNet-B0 (no DFT channel, `USE_FFT_CHANNEL = False`), same split, augmentation and schedule. |
+| 4 | [`ablation_efnetb0.ipynb`](https://colab.research.google.com/drive/1Dey-o10kdHUNtMh4D-kb0P-01N765JwG)| RGB-only EfficientNet-B0 (no DFT channel, `USE_FFT_CHANNEL = False`), same split, augmentation and schedule. |
 | 5 | [`03_classification_stats_efficiency_fixed.ipynb`](https://colab.research.google.com/drive/14ajRghB_AvTYKe3j08CYD7Lpfwmr3j2M) | Six classifier heads, bootstrap CIs, McNemar/DeLong + Holm, feature ablation, 5-fold identity-grouped CV, LOSO, k-NN attribution, latency/FLOPs/memory, and ONNX export. |
 
 ### Trained models and outputs
